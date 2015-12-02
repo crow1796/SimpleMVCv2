@@ -23,4 +23,9 @@ class Authenticator{
 		Session::flash('errors', $errors);
 		Redirect::to('?controller=AuthController&action=getLogin');
 	}
+
+	public function logoutUser(){
+		Session::delete(Globals::LOGGED_USER);
+		Redirect::to('?controller=AuthController&action=getLogin');
+	}
 }

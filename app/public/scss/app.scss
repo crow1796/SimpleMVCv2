@@ -1,0 +1,9 @@
+.form-container{
+	position: relative;
+	
+	.flash{
+		position: absolute;
+		z-index: 1000;
+		width: 100%;
+	}
+}

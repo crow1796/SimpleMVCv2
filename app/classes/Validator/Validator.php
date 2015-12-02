@@ -2,6 +2,8 @@
 
 namespace App\Classes\Validator;
 use App\Classes\Validator\RulesTrait as Rules;
+use App\Classes\Utils\Token;
+use App\Classes\Utils\Globals;
 
 class Validator{
 	use Rules;
@@ -13,8 +15,11 @@ class Validator{
 	}
 
 	public function validate($data, $rules){
-		array_walk($rules, [$this, 'extractFields'], $data);
-		return $this;
+		if(Token::match($data[Globals::TOKEN_NAME])){
+			array_walk($rules, [$this, 'extractFields'], $data);
+			return $this;
+		}
+		return false;
 	}
 
 	protected function extractFields($fieldRules, $fieldName, $data){

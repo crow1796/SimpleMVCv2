@@ -1,0 +1,8 @@
+.form-container {
+  position: relative; }
+  .form-container .flash {
+    position: absolute;
+    z-index: 1000;
+    width: 100%; }
+
+/*# sourceMappingURL=all.css.map */

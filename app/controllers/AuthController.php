@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Classes\Utils\Input;
@@ -11,11 +10,15 @@ use App\Classes\Utils\Hash;
 use App\Classes\Utils\Globals;
 use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Classes\Auth\Authenticator;
+use App\Classes\Utils\Token;
 
 class AuthController extends Controller{
+
+	protected $className = __CLASS__;
+
 	public function __construct(DatabaseInterface $database){
 		parent::__construct($database);
-		$this->middleware('App\Classes\Middlewares\Auth\RedirectIfAuthenticated');
+		$this->middleware('App\Classes\Middlewares\Auth\RedirectIfAuthenticated', ['except' => ['getLogout', 'getRegister']]);
 	}
 
 	public function getLogin(){
@@ -55,6 +58,7 @@ class AuthController extends Controller{
 											'confirmed' => Input::get('password')],
 				'firstname'			=> ['required' => true],
 				'lastname'			=> ['required' => true],
+				'age'				=> ['required' => true],
 				'email'				=> ['required' => true,
 											'email' => true],
 				'address'			=> ['required' => true,
@@ -67,6 +71,7 @@ class AuthController extends Controller{
 							'username' => Input::get('username'),
 							'password' => Hash::make(Input::get('password')),
 							'name' => Input::get('firstname') . ' ' . Input::get('lastname'),
+							'age' => Input::get('age'),
 							'address' => Input::get('address')
 				));
 
@@ -78,5 +83,12 @@ class AuthController extends Controller{
 
 		Session::flash('errors', $validation->errors());
 		Redirect::to('?controller=AuthController&action=getRegister');
+	}
+
+	public function getLogout(){
+		if(Token::match(Input::get(Globals::TOKEN_NAME))){
+			$authenticator = new Authenticator($this->database->getConnection());
+			$authenticator->logoutUser();
+		}
 	}
 }

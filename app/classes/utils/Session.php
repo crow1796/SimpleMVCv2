@@ -24,4 +24,12 @@ class Session{
 		unset($_SESSION[$name]);
 		return $session;
 	}
+
+	public function delete($name){
+		if(self::has($name)){
+			unset($_SESSION[$name]);
+			return true;
+		}
+		return false;
+	}
 }

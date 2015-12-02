@@ -3,7 +3,7 @@
 use App\Classes\Router\Facades\RouteFacade as Route;
 
 $controllers = [
-	'AuthController' => ['getLogin', 'postLogin', 'getRegister', 'postRegister'],
+	'AuthController' => ['getLogin', 'postLogin', 'getRegister', 'postRegister', 'getLogout'],
 	'PagesController' => ['home']
 ];
 

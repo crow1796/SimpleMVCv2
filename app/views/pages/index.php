@@ -10,6 +10,10 @@
 <body>
 	<div class="container">
 		<h1 class="page-header text-center">Welcome</h1>
+		<form action="?controller=AuthController&amp;action=getLogout" method="POST">
+			<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME; ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
+			<button type="submit" class="btn btn-md btn-link">Logout</button>
+		</form>
 	</div>
 </body>
 </html>
