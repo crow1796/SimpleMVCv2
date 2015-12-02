@@ -4,6 +4,7 @@ namespace App\Classes\Router\Facades;
 use \Exception;
 use App\Controllers;
 use App\Classes\Databases\Factories\DatabaseFactory as DBFactory;
+use App\Classes\Utils\Globals;
 
 class RouteFacade{
 
@@ -26,7 +27,7 @@ class RouteFacade{
 	}
 
 	private function call($controller, $action){
-		self::$database = DBFactory::make('App\Classes\Databases\MysqlDatabase');
+		self::$database = DBFactory::make('App\Classes\Databases\\' . Globals::DB_CLASS);
 		$controller = 'App\Controllers\\' . $controller;
 		$controller = new $controller(self::$database);
 

@@ -3,6 +3,7 @@
 namespace App\Classes\Utils;
 
 class Globals{
+	const DB_CLASS = 'MysqlDatabase';
 	const DB_HOST = 'localhost';
 	const DB_NAME = 'pdopractice';
 	const DB_PORT = '';
