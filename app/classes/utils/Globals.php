@@ -16,4 +16,5 @@ class Globals{
 
 	const DEFAULT_CONTROLLER = 'AuthController';
 	const DEFAULT_ACTION = 'getLogin';
+	const DEFAULT_URL = 'login';
 }

@@ -12,7 +12,8 @@ class ValidatorFactory {
 		if(!empty($data) && !empty($rules) && !is_null($connection)){
 			$validator = new Validator($connection);
 			$validator->validate($data, $rules);
+			return $validator;
 		}
-		return $validator;
+		return false;
 	}
 }

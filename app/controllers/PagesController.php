@@ -13,7 +13,7 @@ class PagesController extends Controller{
 		$this->middleware('App\Classes\Middlewares\Auth\RedirectIfNotAuthenticated');
 	}
 
-	public function home(){
+	public function index(){
 		view('pages/index');
 	}
 }

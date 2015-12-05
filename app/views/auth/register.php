@@ -15,7 +15,8 @@
 				?>
 				<div class="col-sm-6 col-sm-offset-3">
 				<h1 class="text-center page-header">Register</h1>
-					<form action="?controller=AuthController&amp;action=postRegister" method="POST">
+					<form action="<?php echo url('register/submit') ?>" method="POST">
+						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">
 							<label for="username" class="control-label"><span class="text-danger">*</span> Username:</label>
 							<input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
@@ -54,7 +55,7 @@
 							<button type="submit" class="btn btn-md btn-block btn-primary">Register!</button>
 						</div>
 					</form>
-					Already have an account? <a href="?=controller=AuthController&amp;action=getLogin">Login</a>
+					Already have an account? <a href="<?php echo url('login'); ?>">Login</a>
 				</div>
 			</div>
 		</div>

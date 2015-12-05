@@ -14,9 +14,9 @@
 					view('partials/_messages');
 					view('partials/_errors');
 				?>
-				<div class="col-sm-6 col-sm-offset-3">
-				<h1 class="text-center page-header">Login</h1>
-					<form action="?controller=AuthController&amp;action=postLogin" method="POST">
+				<div class="col-sm-5 col-sm-offset-7">
+					<h1 class="text-center page-header">Login</h1>
+					<form action="<?php echo url('login/attempt'); ?>" method="POST">
 						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME; ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">
 							<label for="username" class="control-label">Username:</label>
@@ -26,11 +26,15 @@
 							<label for="password" class="control-label">Password:</label>
 							<input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password">
 						</div>
+						<div class="form-group">
+							<label for="remember-me" class="control-label"><input type="checkbox" name="remember-me" id="remember-me"> Remember Me?</label>
+						</div>
 						<div class="form-group text-right">
 							<button type="submit" class="btn btn-md btn-primary">Login</button>
 						</div>
 						<div class="form-group">
-							Don't have any account? <a href="?controller=AuthController&amp;action=getRegister">Sign Up</a>
+							<p>Don't have any account? <a href="<?php echo url('register'); ?>">Sign Up</a></p>
+							<p>Forgot password? <a href="<?php echo url('forgot-password'); ?>">Click here</a></p>
 						</div>
 					</form>
 				</div>

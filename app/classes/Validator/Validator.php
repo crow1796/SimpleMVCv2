@@ -42,14 +42,13 @@ class Validator{
 	}
 
 	public function passes(){
-		if(count($this->errors()) > 0){
+		if(count($this->errors) > 0){
 			return false;
 		}
-
 		return true;
 	}
 
 	public function fails(){
-		return !$this->passes()? true: false;
+		return $this->passes() === false? true: false;
 	}
 }

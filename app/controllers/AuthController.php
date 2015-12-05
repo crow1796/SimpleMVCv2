@@ -13,7 +13,6 @@ use App\Classes\Auth\Authenticator;
 use App\Classes\Utils\Token;
 
 class AuthController extends Controller{
-
 	protected $className = __CLASS__;
 
 	public function __construct(DatabaseInterface $database){
@@ -22,7 +21,9 @@ class AuthController extends Controller{
 	}
 
 	public function getLogin(){
-		view('auth/login');
+		$names = ['Demo 1', 'Demo 2', 'Demo 3', 'Demo 4', 'Demo 5', 'Demo 6', 'Demo 7', 'Demo 8', 'Demo 9', 'Demo 10'];
+		$address = 'Puerto';
+		view('auth/login', compact('names', 'address'));
 	}
 
 	public function postLogin(){
@@ -38,7 +39,7 @@ class AuthController extends Controller{
 			$authenticator->attempt('username', ['username' => Input::get('username'), 'password' => Input::get('password')]);
 		}
 		Session::flash('errors', $validation->errors());
-		Redirect::to('?controller=AuthController&action=getLogin');
+		Redirect::to(url('login'));
 	}
 
 	public function getRegister(){
@@ -78,11 +79,11 @@ class AuthController extends Controller{
 			$messages[] = 'Congratulations! You have created an account successfully!';
 			$messages[] = 'You can now login.';
 			Session::flash('messages', $messages);
-			Redirect::to('?controller=AuthController&action=getLogin');
+			Redirect::to(url('login'));
 		}
 
 		Session::flash('errors', $validation->errors());
-		Redirect::to('?controller=AuthController&action=getRegister');
+		Redirect::to(url('register'));
 	}
 
 	public function getLogout(){

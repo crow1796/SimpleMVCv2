@@ -31,7 +31,7 @@ trait RulesTrait{
 	protected function email($key, $data, $mustBeAnEmail){
 		if($mustBeAnEmail){
 			if(!preg_match_all('/[a-zA-Z0-9\.-]+[@{1}][a-zA-Z0-9]+[\.{1}][a-zA-Z]+/i', $data)){
-				$this->addError(ucfirst($key) . ' must be a valid e-mail address.');			
+				$this->addError(ucfirst($key) . ' must be a valid e-mail address.');
 				return false;
 			}
 		}

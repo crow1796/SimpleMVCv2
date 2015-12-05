@@ -10,9 +10,9 @@ class Token{
 	}
 
 	public static function match($token){
-		if($token != Session::get(Globals::TOKEN_NAME)){
-			return false;
+		if(isset($token) && !empty($token) && $token === Session::get(Globals::TOKEN_NAME)){
+			return true;
 		}
-		return true;
+		return false;
 	}
 }

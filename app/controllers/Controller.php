@@ -26,14 +26,14 @@ class Controller {
 	}
 
 	public function checkExceptions($value, $key, $middlewares){
-		if(Input::get('action') != $value){
-			if(is_array($middlewares)){
-				array_walk($middlewares, [$this, 'handleMiddleware']);
-			}
-			$middleware = new $middlewares;
-			return $middleware->handle();
-		}
-		return false;
+		// if(Input::get('action') != $value){
+		// 	if(is_array($middlewares)){
+		// 		array_walk($middlewares, [$this, 'handleMiddleware']);
+		// 	}
+		// 	$middleware = new $middlewares;
+		// 	return $middleware->handle();
+		// }
+		// return false;
 	}
 
 	public function handleMiddleware($value){

@@ -9,7 +9,7 @@ use App\Classes\Utils\Redirect;
 class RedirectIfAuthenticated extends Middleware{
 	public function handle(){
 		if(Session::has(Globals::LOGGED_USER)){
-			Redirect::to('?controller=PagesController&action=home');
+			Redirect::to(url('home'));
 		}
 		return false;
 	}
