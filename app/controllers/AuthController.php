@@ -21,9 +21,7 @@ class AuthController extends Controller{
 	}
 
 	public function getLogin(){
-		$names = ['Demo 1', 'Demo 2', 'Demo 3', 'Demo 4', 'Demo 5', 'Demo 6', 'Demo 7', 'Demo 8', 'Demo 9', 'Demo 10'];
-		$address = 'Puerto';
-		view('auth/login', compact('names', 'address'));
+		view('auth/login');
 	}
 
 	public function postLogin(){
@@ -86,10 +84,42 @@ class AuthController extends Controller{
 		Redirect::to(url('register'));
 	}
 
+	public function getForgotPassword(){
+		view('auth/forgot');
+	}
+
+	public function postForgotPassword(){
+		$rules = [
+			'username'	=> ['required' => true,
+											'min' => 2],
+			'email'			=> ['required' => true,
+												'email' => true]
+		];
+
+		$validation = ValidatorFactory::make(Input::all(), $rules, $this->database->getConnection());
+		if($validation->passes()){
+			echo Input::get('username') . '<br/>' . Input::get('email');
+		}
+
+		Session::flash('errors', $validation->errors());
+		Redirect::to(url('forgot-password'));
+	}
+
 	public function getLogout(){
 		if(Token::match(Input::get(Globals::TOKEN_NAME))){
 			$authenticator = new Authenticator($this->database->getConnection());
 			$authenticator->logoutUser();
+		}
+	}
+
+	public function sampleAjax(){
+		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+			// $data = ['One', 'Two', 'Three'];
+			// echo json_encode($data);
+			
+			$data = '[{"id" : 1, "name": "Ododz"}, {"id" : 2, "name" : "Gwapodz"}]';
+			echo json_encode(json_decode($data));
+			return true;
 		}
 	}
 }

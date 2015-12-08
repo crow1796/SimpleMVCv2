@@ -14,7 +14,7 @@ class Authenticator{
 	}
 
 	public function attempt($finder, $inputs){
-		$user = (new User($this->connection))->findBy($finder, $inputs['username']);
+		$user = (new User($this->connection))->findBy($finder, $inputs[$finder]);
 		if(!is_null($user) && password_verify($inputs['password'], $user->password)){
 			Session::set(Globals::LOGGED_USER, $user->id);
 			Redirect::to(url('home'));

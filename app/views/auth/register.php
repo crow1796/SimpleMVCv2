@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<title>Register</title>
 		<?php
-			view('partials/_assets');
+			$title = 'Register';
+			view('partials/_assets', compact('title'));
 		?>
 	</head>
 	<body>
 		<div class="container">
-			<div class="row form-container">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				<h1 class="text-center page-header">Register</h1>
 				<?php
 					view('partials/_errors');
 				?>
-				<div class="col-sm-6 col-sm-offset-3">
-				<h1 class="text-center page-header">Register</h1>
 					<form action="<?php echo url('register/submit') ?>" method="POST">
 						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">

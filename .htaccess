@@ -1,7 +1,4 @@
 RewriteEngine On
 
-#Rewrite app/public directory
-RewriteRule ^app/?public/?(images|css|js)?/?(\w+\.?\w+\.?(:?css|js|jpg))$ app/public/$1/$2
-
 #Rewrite all links
 RewriteRule ^(/?(?:\w+[^\s|\.]/?\w*)+)$ ?url=$1 [L]

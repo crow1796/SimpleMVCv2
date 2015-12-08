@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<title>Login</title>
 		<?php
-			view('partials/_assets');
-		?>
+			$title = 'Login';
+      view('partials/_assets', compact('title'));
+    ?>
 	</head>
 	<body>
 		<div class="container">
-			<div class="row form-container">
-				<?php
-					view('partials/_messages');
-					view('partials/_errors');
-				?>
+			<div class="row">
 				<div class="col-sm-5 col-sm-offset-7">
 					<h1 class="text-center page-header">Login</h1>
+					<?php
+						view('partials/_messages');
+						view('partials/_errors');
+					?>
 					<form action="<?php echo url('login/attempt'); ?>" method="POST">
 						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME; ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">
@@ -34,9 +33,11 @@
 						</div>
 						<div class="form-group">
 							<p>Don't have any account? <a href="<?php echo url('register'); ?>">Sign Up</a></p>
-							<p>Forgot password? <a href="<?php echo url('forgot-password'); ?>">Click here</a></p>
+							<p>Forgot password? <a href="<?php echo url('forgot-password'); ?>">Recover Password</a></p>
 						</div>
 					</form>
+					<button class="btn btn-md btn-danger" type="button" id="sampleajaxbtn">Ajax</button>
+					<div class="ajax-result"></div>
 				</div>
 			</div>
 		</div>

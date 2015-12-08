@@ -8,12 +8,20 @@ use App\Classes\Router\Facades\RouteFacade as Route;
 // ];
 
 $routes = [
-	'login'								=> 'AuthController@getLogin',
-	'login/attempt'				=> 'AuthController@postLogin',
-	'register'						=> 'AuthController@getRegister',
-	'register/submit'			=> 'AuthController@postRegister',
-	'user/logout'					=> 'AuthController@getLogout',
-	'home'								=> 'PagesController@index'
+	'login'										=> 'AuthController@getLogin',
+	'login/attempt'						=> 'AuthController@postLogin',
+
+	'register'								=> 'AuthController@getRegister',
+	'register/submit'					=> 'AuthController@postRegister',
+
+	'user/logout'							=> 'AuthController@getLogout',
+
+	'forgot-password'					=> 'AuthController@getForgotPassword',
+	'forgot-password/recover'	=> 'AuthController@postForgotPassword',
+
+	'home'										=> 'PagesController@index',
+
+	'sampleajax'						=> 'AuthController@sampleAjax'
 ];
 
 // Route::register($controller, $action, $controllers);
