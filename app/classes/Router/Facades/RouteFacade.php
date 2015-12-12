@@ -5,10 +5,12 @@ use \Exception;
 use App\Controllers;
 use App\Classes\Databases\Factories\DatabaseFactory as DBFactory;
 use App\Classes\Utils\Globals;
+use App\Views\View;
 
 class RouteFacade{
 
 	private static $database;
+	private static $view;
 
 	public function __construct(){
 
@@ -23,7 +25,7 @@ class RouteFacade{
 			throw new Exception('Route Not Found: ' . $url);
 		}
 
-		self::call($routes[$url]);
+		return self::call($routes[$url]);
 	}
 
 	// public function register($controller, $action, $controllers){
@@ -34,9 +36,7 @@ class RouteFacade{
 	// 	self::call($controller, $action);
 	// }
 
-	private function call($route){
-		// Create Database Instance
-		self::$database = DBFactory::make('App\Classes\Databases\\' . Globals::DB_CLASS);
+	private function call($route, $params = array()){
 		// Request Method
 		// RouteAction - ExampleController@method
 		$routeAction = explode('@', $route);
@@ -47,9 +47,9 @@ class RouteFacade{
 		// Controller with namespace
 		$controller = 'App\Controllers\\' .	$controllerName;
 		// Create controller instance
-		$controller = new $controller(self::$database);
+		$controller = new $controller();
 
-		return call_user_func_array([$controller, $methodName], array());
+		return call_user_func_array([$controller, $methodName], $params);
 	}
 
 	// private function call($controller, $action){

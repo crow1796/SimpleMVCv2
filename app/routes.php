@@ -21,7 +21,7 @@ $routes = [
 
 	'home'										=> 'PagesController@index',
 
-	'sampleajax'						=> 'AuthController@sampleAjax'
+	'sampleajax'							=> 'AuthController@sampleAjax',
 ];
 
 // Route::register($controller, $action, $controllers);

@@ -1,4 +1,9 @@
 RewriteEngine On
 
 #Rewrite all links
-RewriteRule ^(/?(?:\w+[^\s|\.]/?\w*)+)$ ?url=$1 [L]
+#RewriteRule ^(/?(?:\w+[^\s|\.]/?\w*)+)$ ?url=$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ ?url=$1

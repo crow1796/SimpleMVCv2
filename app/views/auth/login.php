@@ -37,7 +37,6 @@
 						</div>
 					</form>
 					<button class="btn btn-md btn-danger" type="button" id="sampleajaxbtn">Ajax</button>
-					<div class="ajax-result"></div>
 				</div>
 			</div>
 		</div>

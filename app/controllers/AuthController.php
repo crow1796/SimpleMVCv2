@@ -11,17 +11,19 @@ use App\Classes\Utils\Globals;
 use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Classes\Auth\Authenticator;
 use App\Classes\Utils\Token;
+use App\Views\View;
+use App\Classes\Core\Container;
 
 class AuthController extends Controller{
 	protected $className = __CLASS__;
 
-	public function __construct(DatabaseInterface $database){
-		parent::__construct($database);
+	public function __construct(){
+		parent::__construct();
 		$this->middleware('App\Classes\Middlewares\Auth\RedirectIfAuthenticated', ['except' => ['getLogout', 'getRegister']]);
 	}
 
 	public function getLogin(){
-		view('auth/login');
+		$this->view->make('auth/login');
 	}
 
 	public function postLogin(){
@@ -31,9 +33,9 @@ class AuthController extends Controller{
 				'password' => ['required' => true,
 								'min' => 2]
 			);
-		$validation = ValidatorFactory::make(Input::all(), $rules, $this->database->getConnection());
+		$validation = ValidatorFactory::make(Input::all(), $rules);
 		if($validation->passes()){
-			$authenticator = new Authenticator($this->database->getConnection());
+			$authenticator = new Authenticator();
 			$authenticator->attempt('username', ['username' => Input::get('username'), 'password' => Input::get('password')]);
 		}
 		Session::flash('errors', $validation->errors());
@@ -41,7 +43,7 @@ class AuthController extends Controller{
 	}
 
 	public function getRegister(){
-		view('auth/register');
+		$this->view->make('auth/register');
 	}
 
 	public function postRegister(){
@@ -63,9 +65,9 @@ class AuthController extends Controller{
 				'address'			=> ['required' => true,
 											'min' => 2]
 			);
-		$validation = ValidatorFactory::make(Input::all(), $rules, $this->database->getConnection());
+		$validation = ValidatorFactory::make(Input::all(), $rules);
 		if($validation->passes()){
-			$user = new User($this->database->getConnection());
+			$user = new User();
 			$created = $user->create(array(
 							'username' => Input::get('username'),
 							'password' => Hash::make(Input::get('password')),
@@ -85,7 +87,7 @@ class AuthController extends Controller{
 	}
 
 	public function getForgotPassword(){
-		view('auth/forgot');
+		$this->view->make('auth/forgot');
 	}
 
 	public function postForgotPassword(){
@@ -96,7 +98,7 @@ class AuthController extends Controller{
 												'email' => true]
 		];
 
-		$validation = ValidatorFactory::make(Input::all(), $rules, $this->database->getConnection());
+		$validation = ValidatorFactory::make(Input::all(), $rules);
 		if($validation->passes()){
 			echo Input::get('username') . '<br/>' . Input::get('email');
 		}
@@ -107,7 +109,7 @@ class AuthController extends Controller{
 
 	public function getLogout(){
 		if(Token::match(Input::get(Globals::TOKEN_NAME))){
-			$authenticator = new Authenticator($this->database->getConnection());
+			$authenticator = new Authenticator();
 			$authenticator->logoutUser();
 		}
 	}
@@ -116,10 +118,14 @@ class AuthController extends Controller{
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 			// $data = ['One', 'Two', 'Three'];
 			// echo json_encode($data);
-			
+
 			$data = '[{"id" : 1, "name": "Ododz"}, {"id" : 2, "name" : "Gwapodz"}]';
 			echo json_encode(json_decode($data));
 			return true;
 		}
+	}
+
+	public function sample($slug){
+		echo $slug;
 	}
 }

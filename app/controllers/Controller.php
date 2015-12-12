@@ -3,13 +3,14 @@
 namespace App\Controllers;
 use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Classes\Utils\Input;
+use App\Views\View;
 
 class Controller {
-	protected $database;
+	protected $view;
 	protected $className = __CLASS__;
 
-	public function __construct(DatabaseInterface $database){
-		$this->database = $database;
+	public function __construct(){
+		$this->view = new View();
 	}
 
 	public function middleware($middlewares, $options = array()){

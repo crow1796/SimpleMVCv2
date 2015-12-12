@@ -6,11 +6,12 @@ use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Classes\Utils\Session;
 use App\Classes\Utils\Redirect;
 use App\Classes\Utils\Globals;
+use App\Classes\Core\Container;
 
 class Authenticator{
 	protected $connection;
-	public function __construct($connection){
-		$this->connection = $connection;
+	public function __construct(){
+		$this->connection = Container::resolve('db.connection');
 	}
 
 	public function attempt($finder, $inputs){

@@ -4,14 +4,15 @@ namespace App\Classes\Validator;
 use App\Classes\Validator\RulesTrait as Rules;
 use App\Classes\Utils\Token;
 use App\Classes\Utils\Globals;
+use App\Classes\Core\Container;
 
 class Validator{
 	use Rules;
 	protected $errors = [];
 	protected $connection;
 
-	public function __construct($connection){
-		$this->connection = $connection;
+	public function __construct(){
+		$this->connection = Container::resolve('db.connection');
 	}
 
 	public function validate($data, $rules){
