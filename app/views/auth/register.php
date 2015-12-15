@@ -14,41 +14,41 @@
 				<?php
 					view('partials/_errors');
 				?>
-					<form action="<?php echo url('register/submit') ?>" method="POST">
+					<form action="<?php echo url('register') ?>" method="POST">
 						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">
 							<label for="username" class="control-label"><span class="text-danger">*</span> Username:</label>
-							<input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+							<input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" required>
 						</div>
 						<div class="form-group">
 							<label for="password" class="control-label"><span class="text-danger">*</span> Password:</label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
+							<input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
 						</div>
 						<div class="form-group">
 							<label for="confirm-password" class="control-label"><span class="text-danger">*</span> Confirm Password:</label>
-							<input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Re-enter your password">
+							<input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Re-enter your password" required>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<label for="firstname" class="control-label"><span class="text-danger">*</span> First Name:</label>
-								<input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter First Name">
+								<input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter First Name" required>
 							</div>
 							<div class="col-sm-6">
 								<label for="lastname" class="control-label"><span class="text-danger">*</span> Last Name:</label>
-								<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name">
+								<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="age" class="control-label"><span class="text-danger">*</span> Age:</label>
-							<input type="number" name="age" id="age" class="form-control" placeholder="Enter your age">
+							<input type="number" name="age" id="age" class="form-control" placeholder="Enter your age" required>
 						</div>
 						<div class="form-group">
 							<label for="email" class="control-label"><span class="text-danger">*</span> E-mail:</label>
-							<input type="email" name="email" id="email" class="form-control" placeholder="Enter your E-mail">
+							<input type="email" name="email" id="email" class="form-control" placeholder="Enter your E-mail" required>
 						</div>
 						<div class="form-group">
 							<label for="address" class="control-label"><span class="text-danger">*</span> Address:</label>
-							<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address">
+							<input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" required>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-md btn-block btn-primary">Register!</button>

@@ -11,14 +11,27 @@ abstract class DatabaseAdapter implements Database{
 		$this->connect();
 	}
 
+	/**
+	 * Check if the connection is null,
+	 * if null create new.
+	 * @return mixed 
+	 */
 	public function connect(){
 		if(is_null($this->pdo) || (!$this->pdo instanceof PDO)){
 			$this->pdo = $this->makeConnection();
 		}
 	}
 
+	/**
+	 * Set the connection.
+	 * @return mixed 
+	 */
 	public abstract function makeConnection();
 
+	/**
+	 * Get the connection.
+	 * @return mixed 
+	 */
 	public function getConnection(){
 		return $this->pdo;
 	}

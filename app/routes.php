@@ -1,28 +1,35 @@
 <?php
-
 use App\Classes\Router\Facades\RouteFacade as Route;
 
-// $controllers = [
-// 	'AuthController' => ['getLogin', 'postLogin', 'getRegister', 'postRegister', 'getLogout'],
-// 	'PagesController' => ['home']
+// $routes = [
+// 	'login'										=> 'Auth\AuthController@getLogin',
+// 	'login/attempt'						=> 'Auth\AuthController@postLogin',
+//
+// 	'register'								=> 'Auth\AuthController@getRegister',
+// 	'register/submit'					=> 'Auth\AuthController@postRegister',
+//
+// 	'user/logout'							=> 'Auth\AuthController@getLogout',
+//
+// 	'forgot-password'					=> 'Auth\AuthController@getForgotPassword',
+// 	'forgot-password/recover'	=> 'Auth\AuthController@postForgotPassword',
+//
+// 	'home'										=> 'PagesController@index',
+//
+// 	'sampleajax'							=> 'Auth\AuthController@sampleAjax',
 // ];
+Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('login', 'Auth\AuthController@postLogin');
 
-$routes = [
-	'login'										=> 'AuthController@getLogin',
-	'login/attempt'						=> 'AuthController@postLogin',
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', 'Auth\AuthController@postRegister');
 
-	'register'								=> 'AuthController@getRegister',
-	'register/submit'					=> 'AuthController@postRegister',
+Route::post('logout', 'Auth\AuthController@getLogout');
 
-	'user/logout'							=> 'AuthController@getLogout',
+Route::get('recover', 'Auth\AuthController@getForgotPassword');
+Route::post('recover', 'Auth\AuthController@postForgotPassword');
 
-	'forgot-password'					=> 'AuthController@getForgotPassword',
-	'forgot-password/recover'	=> 'AuthController@postForgotPassword',
+Route::get('home', 'PagesController@index');
 
-	'home'										=> 'PagesController@index',
+Route::post('sampleajax', 'Auth\AuthController@sampleAjax');
 
-	'sampleajax'							=> 'AuthController@sampleAjax',
-];
-
-// Route::register($controller, $action, $controllers);
-Route::register($url, $routes);
+Route::check($url, $_SERVER['REQUEST_METHOD']);

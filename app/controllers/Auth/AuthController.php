@@ -1,6 +1,6 @@
 <?php
-namespace App\Controllers;
-use App\Controllers\Controller;
+namespace App\Controllers\Auth;
+use App\Controllers\Controller as BaseController;
 use App\Classes\Utils\Input;
 use App\Classes\Utils\Redirect;
 use App\Classes\Validator\Factories\ValidatorFactory;
@@ -14,7 +14,7 @@ use App\Classes\Utils\Token;
 use App\Views\View;
 use App\Classes\Core\Container;
 
-class AuthController extends Controller{
+class AuthController extends BaseController{
 	protected $className = __CLASS__;
 
 	public function __construct(){
@@ -22,10 +22,18 @@ class AuthController extends Controller{
 		$this->middleware('App\Classes\Middlewares\Auth\RedirectIfAuthenticated', ['except' => ['getLogout', 'getRegister']]);
 	}
 
+	/**
+	 * Login Page.
+	 * @return null
+	 */
 	public function getLogin(){
 		$this->view->make('auth/login');
 	}
 
+	/**
+	 * Attempt login.
+	 * @return mixed
+	 */
 	public function postLogin(){
 		$rules = array(
 				'username' => ['required' => true,
@@ -104,7 +112,7 @@ class AuthController extends Controller{
 		}
 
 		Session::flash('errors', $validation->errors());
-		Redirect::to(url('forgot-password'));
+		Redirect::to(url('recover'));
 	}
 
 	public function getLogout(){

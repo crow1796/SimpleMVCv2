@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Controllers;
-use App\Controllers\Controller;
+use App\Controllers\Controller as BaseController;
 use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Views\View;
 
-class PagesController extends Controller{
+class PagesController extends BaseController{
 
 	protected $className = __CLASS__;
 

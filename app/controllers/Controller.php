@@ -3,14 +3,18 @@
 namespace App\Controllers;
 use App\Classes\Databases\Contracts\DatabaseInterface;
 use App\Classes\Utils\Input;
-use App\Views\View;
+use App\Classes\Core\Container;
 
 class Controller {
 	protected $view;
 	protected $className = __CLASS__;
 
+	/**
+	 * Constructor:
+	 * Resolve dependecies.
+	 */
 	public function __construct(){
-		$this->view = new View();
+		$this->view = Container::resolve('view');
 	}
 
 	public function middleware($middlewares, $options = array()){
