@@ -15,7 +15,7 @@ class Input{
 		return isset($_POST[$name])? isset($_POST[$name]) : isset($_GET[$name]);
 	}
 
-	public function all(){
+	public static function all(){
 		return $_SERVER['REQUEST_METHOD'] == 'POST' ? $_POST : $_GET;
 	}
 }

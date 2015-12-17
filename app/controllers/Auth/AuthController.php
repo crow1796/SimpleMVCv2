@@ -14,6 +14,7 @@ use App\Classes\Utils\Token;
 use App\Views\View;
 use App\Classes\Core\Container;
 
+
 class AuthController extends BaseController{
 	protected $className = __CLASS__;
 
@@ -123,7 +124,8 @@ class AuthController extends BaseController{
 	}
 
 	public function sampleAjax(){
-		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+		$request = new \App\Classes\Requests\Http\Request;
+		if($request->isAjax()){
 			// $data = ['One', 'Two', 'Three'];
 			// echo json_encode($data);
 

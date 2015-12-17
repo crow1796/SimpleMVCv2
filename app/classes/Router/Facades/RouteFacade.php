@@ -21,7 +21,7 @@ class RouteFacade{
 	}
 
 	/**
-	 * Method static caller.
+	 * Static method caller.
 	 * @param  String $method
 	 * @param  array $params
 	 * @return mixed
