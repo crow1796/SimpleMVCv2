@@ -18,3 +18,5 @@ Route::post('recover', 'Auth\AuthController@postForgotPassword');
 Route::get('home', 'PagesController@index');
 
 Route::post('sampleajax', 'Auth\AuthController@sampleAjax');
+
+Route::check($url, $_SERVER['REQUEST_METHOD']);
