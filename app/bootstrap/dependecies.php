@@ -9,7 +9,7 @@ use App\Classes\Router\Facades\RouteFacade;
 
 // Register Dependecies
 Container::register('db', function(){
-	return DBFactory::make('App\Classes\Databases\\' . Globals::DB_CLASS);
+	return (new DBFactory)->make('App\Classes\Databases\\' . Globals::DB_CLASS);
 });
 Container::register('db.connection', function(){
 	return Container::resolve('db')->getConnection();
