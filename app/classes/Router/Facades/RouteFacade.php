@@ -8,7 +8,7 @@ use App\Classes\Utils\Globals;
 use App\Views\View;
 
 class RouteFacade{
-
+	
 	private static $database;
 	private static $view;
 	private static $routes = array();
