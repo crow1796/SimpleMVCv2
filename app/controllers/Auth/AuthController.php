@@ -124,18 +124,17 @@ class AuthController extends BaseController{
 	}
 
 	public function sampleAjax(){
-		$request = new \App\Classes\Requests\Http\Request;
-		if($request->isAjax()){
+		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 			// $data = ['One', 'Two', 'Three'];
 			// echo json_encode($data);
 
-			$data = '[{"id" : 1, "name": "Ododz"}, {"id" : 2, "name" : "Gwapodz"}]';
+			$data = '[{"id" : 1, "name": "Lorem"}, {"id" : 2, "name" : "Ipsum"}]';
 			echo json_encode(json_decode($data));
 			return true;
 		}
 	}
 
-	public function sample($slug){
-		echo $slug;
+	public function testWildcards($params = array()){
+		print_r($params);
 	}
 }

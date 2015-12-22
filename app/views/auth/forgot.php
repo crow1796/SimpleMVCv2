@@ -16,11 +16,11 @@
             <input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME; ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
             <div class="form-group">
               <label for="username" class="control-label">Username:</label>
-              <input type="text" name="username" id="username" class="form-control" placeholder="Enter your Username" required>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Enter your Username">
             </div>
             <div class="form-group">
               <label for="email" class="control-label">Email:</label>
-              <input type="email" name="email" id="email" class="form-control" placeholder="Enter your E-mail" required>
+              <input type="email" name="email" id="email" class="form-control" placeholder="Enter your E-mail">
             </div>
             <div class="form-group text-right">
               <button type="submit" class="btn btn-md btn-primary">Recover</button>

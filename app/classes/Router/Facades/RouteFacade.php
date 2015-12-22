@@ -8,10 +8,13 @@ use App\Classes\Utils\Globals;
 use App\Views\View;
 
 class RouteFacade{
-	
+
 	private static $database;
 	private static $view;
 	private static $routes = array();
+
+	protected static $matchedUrl;
+	protected static $params = array();
 
 	/**
 	 * Constructor.
@@ -57,10 +60,40 @@ class RouteFacade{
 	 * @return mixed
 	 */
 	public function check($url, $requestMethod){
-		if(!array_key_exists($url, self::$routes[strtolower($requestMethod)])){
+		$requestMethod = strtolower($requestMethod);
+		if(!array_key_exists($url, self::$routes[$requestMethod])){
+
+			// Count how many uris are not equal and must be on the same index
+			// Count how many uris are equal and must be on the same index
+			$hasMatched = array_walk(self::$routes[$requestMethod], function($value, $key) use ($url, $requestMethod){
+				$registeredUrl = explode('/', $key);
+				$browserUrl = explode('/', rtrim($url, '/'));
+
+				if(count($registeredUrl) != count($browserUrl)){
+					return true;
+				}
+
+				for($counter = 0; $counter < count($registeredUrl); $counter++){
+					if((!strstr($registeredUrl[$counter], '{')) && $registeredUrl[$counter] != $browserUrl[$counter]){
+						return false;
+					}
+
+					if($registeredUrl[$counter] != $browserUrl[$counter] && strstr($registeredUrl[$counter], '{')){
+						preg_match('/{(.+)}/', $registeredUrl[$counter], $wildCard);
+						$wildCard[1] = strtolower($wildCard[1]);
+						self::$params[$wildCard[1]] = $browserUrl[$counter];
+					}
+				}
+
+				self::$matchedUrl = $key;
+			});
+
+			if($hasMatched){
+				return self::call(self::$routes[$requestMethod][self::$matchedUrl], self::$params);
+			}
 			throw new Exception('Route Not Found: ' . $url);
 		}
-		return self::call(self::$routes[strtolower($requestMethod)][$url]);
+		return self::call(self::$routes[$requestMethod][$url]);
 	}
 
 	/**
@@ -81,6 +114,6 @@ class RouteFacade{
 		// Create controller instance
 		$controller = new $controller();
 
-		return call_user_func_array([$controller, $methodName], $params);
+		return call_user_func_array([$controller, $methodName], [$params]);
 	}
 }

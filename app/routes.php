@@ -18,3 +18,5 @@ Route::post('recover', 'Auth\AuthController@postForgotPassword');
 Route::get('home', 'PagesController@index');
 
 Route::post('sampleajax', 'Auth\AuthController@sampleAjax');
+
+Route::get('profile/friends/{name}', 'Auth\AuthController@testWildcards');

@@ -19,11 +19,11 @@
 						<input type="hidden" name="<?php echo App\Classes\Utils\Globals::TOKEN_NAME; ?>" value="<?php echo App\Classes\Utils\Token::generate(); ?>">
 						<div class="form-group">
 							<label for="username" class="control-label">Username:</label>
-							<input type="text" name="username" id="username" class="form-control" placeholder="Enter Your Username" required>
+							<input type="text" name="username" id="username" class="form-control" placeholder="Enter Your Username">
 						</div>
 						<div class="form-group">
 							<label for="password" class="control-label">Password:</label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" required>
+							<input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password">
 						</div>
 						<div class="form-group">
 							<label for="remember-me" class="control-label"><input type="checkbox" name="remember-me" id="remember-me"> Remember Me?</label>
