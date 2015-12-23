@@ -65,7 +65,7 @@ class RouteFacade{
 
 			// Count how many uris are not equal and must be on the same index
 			// Count how many uris are equal and must be on the same index
-			$hasMatched = array_walk(self::$routes[$requestMethod], function($value, $key) use ($url, $requestMethod){
+			$hasMatched = array_walk(self::$routes[$requestMethod], function($value, $key) use ($url){
 				$registeredUrl = explode('/', $key);
 				$browserUrl = explode('/', rtrim($url, '/'));
 

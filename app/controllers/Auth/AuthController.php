@@ -134,7 +134,7 @@ class AuthController extends BaseController{
 		}
 	}
 
-	public function testWildcards($params = array()){
-		print_r($params);
+	public function testWildcards($params){
+		echo $params['name'];
 	}
 }
